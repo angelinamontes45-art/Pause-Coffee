@@ -40,7 +40,7 @@ let user = null,
   page = "dashboard",
   cart = [],
   method = "Cash",
-  shift = "Opening",
+  shift = "Morning",
   search = "",
   dateFilter = "",
   shiftFilter = "";
@@ -393,7 +393,7 @@ function checkout() {
   if (!cart.length) return;
   modal(
     "Payment Recording",
-    `<p>Order total: <strong>${peso(cartTotal())}</strong></p><form id="payform"><div class="field"><label>Payment method</label><select name="method" onchange="payFields()"><option>Cash</option><option>Digital</option></select></div><div class="field"><label>Shift</label><select name="shift"><option>Opening</option><option>Closing</option></select></div><div id="paymentfields"></div><button class="btn" style="width:100%">Confirm Payment & Save Sale</button></form>`,
+    `<p>Order total: <strong>${peso(cartTotal())}</strong></p><form id="payform"><div class="field"><label>Payment method</label><select name="method" onchange="payFields()"><option>Cash</option><option>Digital</option></select></div><div class="field"><label>Shift</label><select name="shift"><option>Morning</option><option>Afternoon</option></select></div><div id="paymentfields"></div><button class="btn" style="width:100%">Confirm Payment & Save Sale</button></form>`,
   );
   payFields();
   $("#payform").onsubmit = async (e) => {
@@ -636,7 +636,7 @@ function reportsView() {
       "Sales History & Reports",
       "Filter completed transactions by date or shift",
     ) +
-    `<div class="panel"><div class="filters"><div class="field"><label>Date</label><input type="date" onchange="dateFilter=this.value;reportsTable()"></div><div class="field"><label>Shift</label><select onchange="shiftFilter=this.value;reportsTable()"><option value="">All shifts</option><option>Opening</option><option>Closing</option></select></div><button class="btn alt" onclick="exportCSV()">Export CSV</button></div><div id="reportTable"></div></div>`;
+    `<div class="panel"><div class="filters"><div class="field"><label>Date</label><input type="date" onchange="dateFilter=this.value;reportsTable()"></div><div class="field"><label>Shift</label><select onchange="shiftFilter=this.value;reportsTable()"><option value="">All shifts</option><option>Morning</option><option>Afternoon</option></select></div><button class="btn alt" onclick="exportCSV()">Export CSV</button></div><div id="reportTable"></div></div>`;
   reportsTable();
 }
 function reportsTable() {
