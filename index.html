@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <!-- Browser and PWA theme color -->
+    <meta name="theme-color"
+          id="themeColor"
+          content="#EAE4D5">
+
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon-192.png">
+
+    <title>PAUSE COFFEE | POS & Sales Management</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Apply saved theme before page renders -->
+    <script>
+        (function () {
+            const savedTheme =
+                localStorage.getItem("pauseCoffeeTheme") || "light";
+
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+
+            document.documentElement.style.colorScheme =
+                savedTheme === "dark" ? "dark" : "light";
+        })();
+    </script>
+
+    <style>
+        /* Prevent light-mode flash during loading */
+        html.dark-mode,
+        html.dark-mode body {
+            background: #171717;
+            color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main application -->
+    <div id="app">
+        <div class="center">
+            Loading PAUSE COFFEE…
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast"
+         role="status"
+         aria-live="polite">
+    </div>
+
+    <!-- Main application JavaScript -->
+    <script src="assets/js/app.js" defer></script>
+
+    <!-- Theme management -->
+    <script>
+        function applyTheme(theme) {
+            const isDark = theme === "dark";
+
+            document.documentElement.classList.toggle(
+                "dark-mode",
+                isDark
+            );
+
+            document.body.classList.toggle(
+                "dark-mode",
+                isDark
+            );
+
+            document.documentElement.style.colorScheme =
+                isDark ? "dark" : "light";
+
+            const themeColor =
+                document.getElementById("themeColor");
+
+            if (themeColor) {
+                themeColor.setAttribute(
+                    "content",
+                    isDark ? "#171717" : "#EAE4D5"
+                );
+            }
+
+            const button =
+                document.getElementById("themeToggle");
+
+            if (button) {
+                button.textContent = isDark
+                    ? "☀️ Light Mode"
+                    : "🌙 Dark Mode";
+            }
+        }
+
+        function toggleTheme() {
+            const isDark =
+                document.body.classList.contains("dark-mode");
+
+            const newTheme = isDark ? "light" : "dark";
+
+            localStorage.setItem(
+                "pauseCoffeeTheme",
+                newTheme
+            );
+
+            applyTheme(newTheme);
+        }
+
+        // Restore saved theme on page load
+        applyTheme(
+            localStorage.getItem("pauseCoffeeTheme") || "light"
+        );
+    </script>
+
+</body>
+</html>
